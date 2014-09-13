@@ -5,15 +5,13 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="Bootstrap, a sleek, intuitive, and powerful mobile first front-end framework for faster and easier web development.">
-        <meta name="keywords" content="HTML, CSS, JS, JavaScript, framework, bootstrap, front-end, frontend, web development">
-        <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
 
         <title>Neki & Purwandi The Wedding Invitation</title>
-        <link href='http://fonts.googleapis.com/css?family=Great+Vibes' rel='stylesheet' type='text/css'>
-        <link href='http://fonts.googleapis.com/css?family=Merriweather:700,400' rel='stylesheet' type='text/css'>
+        <!--- <link href='http://fonts.googleapis.com/css?family=Great+Vibes' rel='stylesheet' type='text/css'> 
+        <link href='http://fonts.googleapis.com/css?family=Merriweather:700,400' rel='stylesheet' type='text/css'> -->
 
-        <link rel="stylesheet" type="text/css" href="/normalize.css">
+        <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+        <!-- <link rel="stylesheet" type="text/css" href="/css/onescroll.css"> -->
         
         <style type="text/css">
             body {
@@ -22,11 +20,192 @@
                 padding: 0;
             }
 
+            header {
+                text-align: center;
+                background-color: #F0767B;
+                height: 380px;
+            }
+
+            section {
+                text-align: center;
+            }
+
+            header img {
+                width: 500px;                
+                margin: 0 auto;
+                
+            }
+
+            h1 {
+                font-family: 'Great Vibes', serif;
+                /* text-shadow: 3px 3px 0 #000; */
+                color: #fff;
+                font-size: 4em;
+                font-weight: normal;
+                margin: 0 auto;
+                padding: 2em 0 0;
+                position: relative;
+            }
+
+            .description {
+                color: #fff;
+                text-shadow: 1px -1px 0 #fff;
+            }
+
+            .description {
+                font-size: 1em;
+                font-weight: 400;
+                padding: 0 0 8em;
+                margin: 0;
+            }
+
+            section {
+                font-size: 1.6em;
+                padding: 100px 0;
+            }
+
+            .day, .time, .venue, .area {
+                margin: 0;
+                font-size: 0.6em;
+                font-weight: normal;
+            }
+
+            .area {
+
+            }
+
+            .scanned-map {
+                margin: 3.5em auto;
+                width: 800px;
+                border: 3px solid #999;
+            }
+
+            #map {
+                width: 100%;
+                height: 700px;
+                margin: 0 auto;
+                border: 1px solid #a19b82;
+                border-left: 0;
+                border-right: 0;
+            }
+
+            .map-overlay {
+                height: 42px;
+                width: 100px;
+                padding: 5px;
+                background: black;
+                color: white;
+                opacity: 0.5;
+                -moz-opacity: 0.8;
+                border-radius: 3px;
+                -moz-border-radius: 3px;
+            }
+
+
         </style>
     </head>
 
     <body>
-        
+        <header>
+            <h1>
+                <span class="bride">Neki</span> <span class="and">&amp;</span> <span class="groom">Purwandi</span>
+            </h1>
+            <p class="description">Wedding Invitation</p>
+        </header>
+
+        <section>
+            <p class="day">Minggu, 28 September 2014</p>
+            <p class="time">12:00&ndash;20:00</p>
+            <p class="venue">Perumahan Dasana Indah Blok RD 3 No 28</p>
+            <p class="area">Bojong Nangka (Bonang), Kelapa Dua, Tangerang</p>
+        </section>
+
+        <section>
+            <div id="map">
+                <div class="scanned-map">
+                    <img src="maps.jpg" alt="peta denah lokasi" width="800px" />
+                </div>
+            </div>
+        </section>
+
+        <footer>
+
+        </footer>
+
+        <script type="text/javascript" src="/js/jquery.js"></script>
+        <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+        <script type="text/javascript" src="/js/gmaps.js"></script>
+        <script type="text/javascript" src="/js/infobox.js"></script>
+        <!-- <script type="text/javascript" src="/js/onescroll.js"></script> -->
+
+        <script type="text/javascript">
+            var merge = function (array1, array2) {
+                for (item in array1) {
+                    if (array2[item] == undefined) {
+                        array2[item] = array1[item];
+                    }
+                }
+                return array2;
+            };
+
+            var showMap = function() {
+                var map = new GMaps({
+                    div: '#map',
+                    lat: -6.254129,
+                    lng: 106.601144,
+                    scrollwheel: false
+                });
+
+                /*map.addMarker({
+                    title: "Masjid Daarul Adzkaar",
+                    lat: -6.306276944687572,
+                    lng: 106.78131580352783
+                });
+
+                var boxStyle = {
+                    background: "black",
+                    color: "white",
+                    opacity: 0.5,
+                    padding: "5px",
+                    borderRadius: "3px"
+                };
+
+                var boxOptions = {
+                    boxStyle: boxStyle,
+                    disableAutoPan: true,
+                    pixelOffset: new google.maps.Size(0,0),
+                    closeBoxURL: "",
+                    isHidden: false,
+                    pane: "mapPane",
+                    enableEventPropagation: true
+                };
+
+                var daarulAdzkaar = new InfoBox(merge(boxOptions, {
+                    content: "Lokasi Acara",
+                    boxStyle: merge(boxStyle, { background: "red" }),
+                    pixelOffset: new google.maps.Size(-35,0),
+                    position: new google.maps.LatLng(-6.306576944687572, 106.78131580352783),
+                }));
+                daarulAdzkaar.open(map.map);
+
+                var fatmawati = new InfoBox(merge(boxOptions, {
+                    content: "RS Fatmawati",
+                    position: new google.maps.LatLng(-6.292909086642901, 106.79554305496216),
+                }));
+                fatmawati.open(map.map);
+
+                var lebakBulus = new InfoBox(merge(boxOptions, {
+                    content: "Terminal Lebak Bulus",
+                    position: new google.maps.LatLng(-6.289406356769607, 106.77425622940063),
+                }));
+                lebakBulus.open(map.map);*/
+            };
+
+            window.onload = function() {
+                showMap();
+            };
+
+        </script>
 
     </body>
 </html>

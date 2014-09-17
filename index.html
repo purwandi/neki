@@ -7,8 +7,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>Neki & Purwandi The Wedding Invitation</title>
-        <!--- <link href='http://fonts.googleapis.com/css?family=Great+Vibes' rel='stylesheet' type='text/css'> 
-        <link href='http://fonts.googleapis.com/css?family=Merriweather:700,400' rel='stylesheet' type='text/css'> -->
+        <link href='http://fonts.googleapis.com/css?family=Great+Vibes' rel='stylesheet' type='text/css'> 
+        <link href='http://fonts.googleapis.com/css?family=Merriweather:700,400' rel='stylesheet' type='text/css'>
 
         <link rel="stylesheet" type="text/css" href="/css/normalize.css">
         <!-- <link rel="stylesheet" type="text/css" href="/css/onescroll.css"> -->
@@ -23,7 +23,7 @@
             header {
                 text-align: center;
                 background-color: #F0767B;
-                height: 380px;
+                height: 480px;
             }
 
             section {
@@ -120,13 +120,11 @@
             <p class="area">Bojong Nangka (Bonang), Kelapa Dua, Tangerang</p>
         </section>
 
-        <section>
-            <div id="map">
-                <div class="scanned-map">
-                    <img src="maps.jpg" alt="peta denah lokasi" width="800px" />
-                </div>
+        <div id="map">
+            <div class="scanned-map">
+                <img src="maps.jpg" alt="peta denah lokasi" width="800px" />
             </div>
-        </section>
+        </div>
 
         <footer>
 
@@ -139,6 +137,10 @@
         <!-- <script type="text/javascript" src="/js/onescroll.js"></script> -->
 
         <script type="text/javascript">
+
+            var lat = -6.2541312,
+                lng = 106.6013807;
+
             var merge = function (array1, array2) {
                 for (item in array1) {
                     if (array2[item] == undefined) {
@@ -151,17 +153,19 @@
             var showMap = function() {
                 var map = new GMaps({
                     div: '#map',
-                    lat: -6.254129,
-                    lng: 106.601144,
+                    lat: lat,
+                    lng: lng,
+                    zoom: 14,
+                    mapTypeControl: false,
                     scrollwheel: false
                 });
 
-                /*map.addMarker({
-                    title: "Masjid Daarul Adzkaar",
-                    lat: -6.306276944687572,
-                    lng: 106.78131580352783
+                map.addMarker({
+                    title: "Neki Home",
+                    lat: lat,
+                    lng: lng
                 });
-
+                
                 var boxStyle = {
                     background: "black",
                     color: "white",
@@ -179,15 +183,18 @@
                     pane: "mapPane",
                     enableEventPropagation: true
                 };
-
-                var daarulAdzkaar = new InfoBox(merge(boxOptions, {
+                
+                
+                
+                var nekiHome = new InfoBox(merge(boxOptions, {
                     content: "Lokasi Acara",
                     boxStyle: merge(boxStyle, { background: "red" }),
                     pixelOffset: new google.maps.Size(-35,0),
-                    position: new google.maps.LatLng(-6.306576944687572, 106.78131580352783),
+                    position: new google.maps.LatLng(lat, lng),
                 }));
-                daarulAdzkaar.open(map.map);
 
+                nekiHome.open(map.map);
+                /*
                 var fatmawati = new InfoBox(merge(boxOptions, {
                     content: "RS Fatmawati",
                     position: new google.maps.LatLng(-6.292909086642901, 106.79554305496216),
